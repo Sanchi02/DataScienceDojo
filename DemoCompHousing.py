@@ -18,7 +18,7 @@ home_data = pd.read_csv(iowa_file_path)
 # Create target object and call it y
 y = home_data.SalePrice
 # Create X
-features = ['LotArea', 'LotFrontage', 'YearBuilt', 'YearRemodAdd', '1stFlrSF', '2ndFlrSF', 'FullBath', 'BedroomAbvGr', 'TotRmsAbvGrd']
+features = ['LotArea', 'YearBuilt', 'YearRemodAdd', '1stFlrSF', '2ndFlrSF', 'FullBath', 'BedroomAbvGr', 'TotRmsAbvGrd']
 X = home_data[features]
 # X = X[pd.notnull(X['LotFrontage'])]
 
