@@ -12,14 +12,13 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 train_file_path = 'C:\\Users\\Sanchi\\Desktop\\Stuff\\DataScienceSiraj\\data\\housing_train.csv'
 test_data_path = 'C:\\Users\\Sanchi\\Desktop\\Stuff\\DataScienceSiraj\\data\\housing_test.csv'
 
-train_data_raw = pd.read_csv(train_file_path)
+train_data = pd.read_csv(train_file_path)
 test_data = pd.read_csv(test_data_path)
 
 features = ['LotArea', 'LotFrontage', 'YearBuilt', 'YearRemodAdd', '1stFlrSF', '2ndFlrSF', 'FullBath', 'BedroomAbvGr', 'TotRmsAbvGrd']
-X = train_data_raw[features]
-y = train_data_raw.SalePrice
+y = train_data.SalePrice
 
-train_data = train_data_raw.drop('SalePrice', axis=1)
+train_data = train_data.drop('SalePrice', axis=1)
 all_data = pd.concat([train_data, test_data], ignore_index=True).copy()
 
 test  = all_data[all_data.LotFrontage.isnull()]
@@ -45,7 +44,6 @@ X_test = test[features_for_lotFrontage]
 X_test = pd.get_dummies(X_test)
 X_test = (X_test - X_test.mean())/X_test.std()
 X_test = X_test.fillna(0)
-
 
 for col in (set(X_train_lotFrontage.columns) - set(X_test.columns)):
     X_test[col] = 0
