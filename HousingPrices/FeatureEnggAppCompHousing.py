@@ -17,7 +17,6 @@ def modelTester(model_name, model, X, y):
     print("Validation MAE {} given Model: {:,.0f}".format(model_name, model_val_mae))
     return(model_val_mae)
 
-
 train_file_path = 'C:\\Users\\Sanchi\\Desktop\\Stuff\\DataScienceSiraj\\data\\housing_train.csv'
 train_data = pd.read_csv(train_file_path)
 
