@@ -9,6 +9,15 @@ import warnings
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
+def modelTester(model_name, model, X, y):
+    train_X, val_X, train_y, val_y = train_test_split(X, y, random_state=1)
+    model.fit(train_X, train_y)
+    model_preds = model.predict(val_X)
+    model_val_mae = mean_absolute_error(model_preds, val_y)
+    print("Validation MAE {} given Model: {:,.0f}".format(model_name, model_val_mae))
+    return(model_val_mae)
+
+
 train_file_path = 'C:\\Users\\Sanchi\\Desktop\\Stuff\\DataScienceSiraj\\data\\housing_train.csv'
 train_data = pd.read_csv(train_file_path)
 
@@ -17,6 +26,8 @@ test_data = pd.read_csv(test_data_path)
 
 # Since, I decided to go with LotFrontage as added parameter,I first need to predict LotFrontage, 
 # as some of the rows have NA as value. 
+
+y = train_data.SalePrice
 
 # Trying to avoid data leakage
 train_data = train_data.drop('SalePrice', axis=1)
@@ -74,7 +85,6 @@ X_test_post = all_data[train_data.shape[0]:]
 # Setting the X and Y for training the model
 features = ['LotArea', 'LotFrontage', 'YearBuilt', 'YearRemodAdd', '1stFlrSF', '2ndFlrSF', 'FullBath', 'BedroomAbvGr', 'TotRmsAbvGrd']
 X_train_post = X_train_post[features]
-y = train_data.SalePrice
 
 # After trying out various models and parameter tuning,
 rf_model_on_full_data = RandomForestRegressor(random_state=1, n_estimators=70)
