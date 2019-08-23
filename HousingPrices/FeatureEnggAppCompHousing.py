@@ -9,6 +9,7 @@ import warnings
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
+# By passing various models available in sklearn, we can check which one works best for our data
 def modelTester(model_name, model, X, y):
     train_X, val_X, train_y, val_y = train_test_split(X, y, random_state=1)
     model.fit(train_X, train_y)
@@ -87,6 +88,7 @@ X_train_post = X_train_post[features]
 
 # After trying out various models and parameter tuning,
 rf_model_on_full_data = RandomForestRegressor(random_state=1, n_estimators=70)
+# RandomForestRegressor(n_estimators=100, criterion='mae', random_state=0)
 rf_model_on_full_data.fit(X_train_post,y)
 
 test_X = X_test_post[features]

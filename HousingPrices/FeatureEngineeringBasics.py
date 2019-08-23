@@ -26,9 +26,14 @@ test_data_path = 'C:\\Users\\Sanchi\\Desktop\\Stuff\\DataScienceSiraj\\data\\hou
 raw_train = pd.read_csv(iowa_file_path)
 raw_test = pd.read_csv(test_data_path)
 
+
+
 # Drop SalePrice column from train dataset and merge into one data frame called all_data
 raw_train = raw_train.drop('SalePrice', axis=1)
 all_data = pd.concat([raw_train, raw_test], ignore_index=True).copy()
+
+sns.pairplot(raw_train)
+plt.show()
 
 # Split into known and unknown LotFrontage records
 test  = all_data[all_data.LotFrontage.isnull()]
