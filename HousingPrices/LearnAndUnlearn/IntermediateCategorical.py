@@ -26,6 +26,8 @@ X.drop(['SalePrice'], axis=1, inplace=True)
 
 # To keep things simple, we'll drop columns with missing values
 cols_with_missing = [col for col in X.columns if X[col].isnull().any()]
+print("cols_with_missing")
+print(cols_with_missing)
 X.drop(cols_with_missing, axis=1, inplace=True)
 X_test.drop(cols_with_missing, axis=1, inplace=True)
 
@@ -101,3 +103,20 @@ OH_X_valid = pd.concat([num_X_valid, OH_cols_valid], axis=1)
 
 print("MAE from Approach 3 (One-Hot Encoding):") 
 print(score_dataset(OH_X_train, OH_X_valid, y_train, y_valid))
+
+
+# MAE from Approach 1 (Drop categorical variables):
+# 17837.82570776256
+# Unique values in 'Condition2' column in training data: ['Norm' 'PosA' 'Feedr' 'PosN' 'Artery' 'RRAe']
+
+# Unique values in 'Condition2' column in validation data: ['Norm' 'RRAn' 'RRNn' 'Artery' 'Feedr' 'PosN']
+# Categorical columns that will be label encoded: ['MSZoning', 'Street', 'LotShape', 'LandContour', 'LotConfig', 'BldgType', 'HouseStyle', 'ExterQual', 'CentralAir', 'KitchenQual', 'PavedDrive', 'SaleCondition']
+
+# Categorical columns that will be dropped from the dataset: ['RoofMatl', 'SaleType', 'Condition2', 'Exterior2nd', 'LandSlope', 'Functional', 'Heating', 'Neighborhood', 'Condition1', 'RoofStyle', 'Foundation', 'HeatingQC', 'ExterCond', 'Utilities', 'Exterior1st']
+# MAE from Approach 2 (Label Encoding):
+# 17575.291883561644
+# Categorical columns that will be one-hot encoded: ['MSZoning', 'Street', 'LotShape', 'LandContour', 'Utilities', 'LotConfig', 'LandSlope', 'Condition1', 'Condition2', 'BldgType', 'HouseStyle', 'RoofStyle', 'RoofMatl', 'ExterQual', 'ExterCond', 'Foundation', 'Heating', 'HeatingQC', 'CentralAir', 'KitchenQual', 'Functional', 'PavedDrive', 'SaleType', 'SaleCondition']
+
+# Categorical columns that will be dropped from the dataset: ['Neighborhood', 'Exterior2nd', 'Exterior1st']
+# MAE from Approach 3 (One-Hot Encoding):
+# 17525.345719178084
